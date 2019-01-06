@@ -4,6 +4,11 @@
     <meta charset="UTF-8"/>
     <title>Vue js</title>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <style>
+        .completed {
+            color: #4cae4c;
+        }
+    </style>
 </head>
 <body>
 <div class="container" id="app">
@@ -14,7 +19,11 @@
                 <div class="panel-body">
                     <h1>My todos ({{ todoCounts}})</h1>
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="(todo, index) in todos">{{todo.title}}<button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">delete</button></li>
+                        <li class="list-group-item"
+                            v-bind:class="{ 'completed' : todo.completed}"
+                            v-for="(todo, index) in todos">
+                            {{todo.title}}<button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">delete</button>
+                        </li>
                     </ul>
                     <form v-on:submit.prevent="addTodo(newTodo)">
                         <div class="form-group">
@@ -36,11 +45,12 @@
         data : {
             message: 'hello world',
             todos : [
-                {id:1,title:'Learn Vuejs'}
+                {id:1,title:'Learn Vuejs',completed:false}
             ],
             newTodo: {
                 id:null,
-                title:''
+                title:'',
+                completed:false
             }
         },
         computed: {
