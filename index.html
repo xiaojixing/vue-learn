@@ -12,8 +12,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Welcome Vue js</div>
                 <div class="panel-body">
-                    <h1>{{ message }}</h1>
-                    <input type="text" class="form-control" v-model="message" />
+                    <h1>My todos</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="todo in todos">{{todo.title}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -24,7 +26,10 @@
     new Vue({
         el: "#app",
         data : {
-            message: 'hello world'
+            message: 'hello world',
+            todos : [
+                {id:1,title:'Learn Vuejs'}
+            ]
         }
     })
 </script>
