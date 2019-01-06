@@ -14,7 +14,7 @@
                 <div class="panel-body">
                     <h1>My todos</h1>
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="todo in todos">{{todo.title}}</li>
+                        <li class="list-group-item" v-for="(todo, index) in todos">{{todo.title}}<button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">delete</button></li>
                     </ul>
                     <form v-on:submit.prevent="addTodo(newTodo)">
                         <div class="form-group">
@@ -44,9 +44,13 @@
             }
         },
         methods:  {
-            addTodo:function(newTodo) {
+            addTodo (newTodo) {
                 this.todos.push(newTodo)
                 this.newTodo = {id:null,title:''}
+            },
+            deleteTodo (index) {
+                // 移除todo
+                this.todos.splice(index, 1);
             }
         }
     })
