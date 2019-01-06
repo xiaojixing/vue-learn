@@ -8,6 +8,9 @@
         .completed {
             color: #4cae4c;
         }
+        .operation {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -22,7 +25,9 @@
                         <li class="list-group-item"
                             v-bind:class="{ 'completed' : todo.completed}"
                             v-for="(todo, index) in todos">
-                            {{todo.title}}<button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">delete</button>
+                            {{todo.title}}
+                            <button class="operation btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(index)">delete</button>
+                            <button class="operation btn btn-xs pull-right " v-bind:class="[todo.completed ? 'btn-danger' : 'btn-success']" v-on:click="toggleCompleted(todo)">{{ todo.completed ? 'undo' : 'completed' }}</button>
                         </li>
                     </ul>
                     <form v-on:submit.prevent="addTodo(newTodo)">
@@ -66,6 +71,9 @@
             deleteTodo (index) {
                 // 移除todo
                 this.todos.splice(index, 1);
+            },
+            toggleCompleted(todo) {
+                todo.completed = !todo.completed
             }
         }
     })
